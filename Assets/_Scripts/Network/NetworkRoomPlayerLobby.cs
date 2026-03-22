@@ -11,6 +11,7 @@ namespace SharedCounter.Network
         [SerializeField] private GameObject lobbyUI = null;
         [SerializeField] private TMP_Text[] playerNameTexts = new TMP_Text[4];
         [SerializeField] private TMP_Text[] playerReadyTexts = new TMP_Text[4];
+        [SerializeField] private Button stopHostButton = null;
         [SerializeField] private Button startGameButton = null;
 
         [SyncVar(hook = nameof(HandleDisplayNameChanged))]
@@ -31,6 +32,7 @@ namespace SharedCounter.Network
         private void Awake()
         {
             SetVisibilityLobbyUI(false);
+            stopHostButton.gameObject.SetActive(false);
             startGameButton.gameObject.SetActive(false);
         }
 
@@ -40,6 +42,7 @@ namespace SharedCounter.Network
 
             if (isServer)
             {
+                stopHostButton.gameObject.SetActive(true);
                 startGameButton.gameObject.SetActive(true);
             }
 
@@ -102,7 +105,11 @@ namespace SharedCounter.Network
         [Command]
         private void CmdTrySetDisplayName(string displayName)
         {
-            // TODO: add name validation
+            if (!Room.IsNameValid(this, displayName))
+            {
+                connectionToClient.Disconnect();
+                return;
+            }
 
             DisplayName = displayName;
         }
@@ -116,6 +123,16 @@ namespace SharedCounter.Network
         public void SetVisibilityLobbyUI(bool on)
         {
             lobbyUI.SetActive(on);
+        }
+
+        public void OnStopClientClick()
+        {
+            Room.StopClient();
+        }
+
+        public void OnStopHostClick()
+        {
+            Room.StopHost();
         }
     }
 }

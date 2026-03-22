@@ -106,6 +106,14 @@ namespace SharedCounter.Network
 
             OnServerReadied?.Invoke(conn);
         }
+
+        public bool IsNameValid(NetworkRoomPlayerLobby player, string name)
+        {
+            if (string.IsNullOrWhiteSpace(name))
+                return false;
+
+            return !RoomPlayers.Any(p => p != player && p.DisplayName == name);
+        }
     }
 }
 
