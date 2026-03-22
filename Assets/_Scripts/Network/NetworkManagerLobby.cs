@@ -13,6 +13,10 @@ namespace SharedCounter.Network
         [Header("Room")]
         [SerializeField] private NetworkRoomPlayerLobby roomPlayerPrefab = null;
 
+        [Header("Game")]
+        [SerializeField] private SharedCounterGameplay sharedCounterPrefab;
+        private SharedCounterGameplay sharedCounterInstance;
+
         public static event Action OnClientConnected;
         public static event Action OnClientDisconnected;
         public static event Action<NetworkConnection> OnServerReadied;
@@ -25,6 +29,15 @@ namespace SharedCounter.Network
             base.OnStartServer();
 
             spawnPrefabs = Resources.LoadAll<GameObject>("SpawnablePrefabs").ToList();
+        }
+
+        [Server]
+        private void SpawnSharedCounter()
+        {
+            if (sharedCounterInstance != null) return;
+
+            sharedCounterInstance = Instantiate(sharedCounterPrefab);
+            NetworkServer.Spawn(sharedCounterInstance.gameObject);
         }
 
         public override void OnStartClient()
@@ -110,7 +123,8 @@ namespace SharedCounter.Network
         public void StartGame()
         {
             if (!IsReadyToStart()) { return; }
-            // TODO: add start game
+
+            SpawnSharedCounter();
         }
 
         public override void OnServerReady(NetworkConnectionToClient conn)

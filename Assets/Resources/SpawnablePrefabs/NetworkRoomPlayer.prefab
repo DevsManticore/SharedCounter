@@ -2167,8 +2167,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: TestRepo.Network.NetworkRoomPlayerLobby, Assembly-CSharp
+      - m_Target: {fileID: 2572140080320312321}
+        m_TargetAssemblyTypeName: SharedCounter.Network.NetworkRoomPlayerLobby, Assembly-CSharp
         m_MethodName: CmdStartGame
         m_Mode: 1
         m_Arguments:
