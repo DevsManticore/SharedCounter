@@ -144,5 +144,13 @@ namespace SharedCounter.Network
         {
             Room.StopHost();
         }
+
+        [ClientRpc]
+        public void RpcPlayerJoined()
+        {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            WebGL.WebGLBridge.Alert($"New player joined!");
+#endif
+        }
     }
 }

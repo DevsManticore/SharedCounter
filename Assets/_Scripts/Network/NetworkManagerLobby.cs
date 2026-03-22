@@ -77,6 +77,13 @@ namespace SharedCounter.Network
         {
             NetworkRoomPlayerLobby roomPlayerInstance = Instantiate(roomPlayerPrefab);
             NetworkServer.AddPlayerForConnection(conn, roomPlayerInstance.gameObject);
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+            foreach (var player in RoomPlayers)
+            {
+                player.RpcPlayerJoined();
+            }
+#endif
         }
 
         public override void OnServerDisconnect(NetworkConnectionToClient conn)
