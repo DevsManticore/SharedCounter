@@ -91,12 +91,25 @@ namespace SharedCounter.Network
         {
             foreach (var player in RoomPlayers)
             {
-                // TODO: add HandleReadyToStart on players
+                player.HandleReadyToStart(IsReadyToStart());
             }
+        }
+
+        private bool IsReadyToStart()
+        {
+            if (numPlayers < minPlayers) { return false; }
+
+            foreach (var player in RoomPlayers)
+            {
+                if (!player.IsReady) { return false; }
+            }
+
+            return true;
         }
 
         public void StartGame()
         {
+            if (!IsReadyToStart()) { return; }
             // TODO: add start game
         }
 

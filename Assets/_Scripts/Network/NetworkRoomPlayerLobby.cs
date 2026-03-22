@@ -115,6 +115,16 @@ namespace SharedCounter.Network
         }
 
         [Command]
+        public void CmdReadyUp()
+        {
+            IsReady = !IsReady;
+
+            HandleReadyStatusChanged(!IsReady, IsReady);
+
+            Room.NotifyPlayersOfReadyState();
+        }
+
+        [Command]
         public void CmdStartGame()
         {
             Room.StartGame();
