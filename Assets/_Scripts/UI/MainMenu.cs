@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using TMPro;
 using UnityEngine;
+using SharedCounter.Network;
 
-namespace SharedCounter.Network
+namespace SharedCounter.UI
 {
     public class MainMenu : MonoBehaviour
     {

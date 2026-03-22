@@ -2,6 +2,7 @@ using Mirror;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using SharedCounter.UI;
 
 namespace SharedCounter.Network
 {

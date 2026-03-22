@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using SharedCounter.WebGL;
 
-namespace SharedCounter.Network
+namespace SharedCounter.UI
 {
     public class PlayerNameInput : MonoBehaviour
     {

@@ -1,8 +1,9 @@
 ﻿using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using SharedCounter.Network;
 
-namespace SharedCounter.Network
+namespace SharedCounter.UI
 {
     public class JoinLobbyMenu : MonoBehaviour
     {
