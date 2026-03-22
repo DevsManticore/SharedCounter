@@ -146,7 +146,8 @@ Implemented via `.jslib` plugin:
 ## Known Issues / Improvements
 
 * No scene transition (Lobby → Game scene)
-* No reconnect logic
+* No reconnect logic 
+* Clipboard API requires HTTPS  (working using my local server but don't worked on itch.io)
 * UI is minimal and not production-ready
 * Limited error handling in networking
 
