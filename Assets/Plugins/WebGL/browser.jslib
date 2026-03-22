@@ -35,6 +35,22 @@ mergeInto(LibraryManager.library, {
 
     CopyToClipboard: function (ptr) {
         var text = UTF8ToString(ptr);
-        navigator.clipboard.writeText(text);
+
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text);
+        } else {
+            var textarea = document.createElement("textarea");
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+
+            try {
+                document.execCommand("copy");
+            } catch (err) {
+                console.error("Clipboard fallback failed", err);
+            }
+
+            document.body.removeChild(textarea);
+        }
     }
 });
